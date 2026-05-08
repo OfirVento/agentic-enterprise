@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "assessmentId": "stub-m0-0001",
+    "generatedAt": "2026-05-08T00:00:00.000Z",
+    "orgName": "Stub Org (M0 placeholder)",
+    "orgIdentifier": "00D000000000000",
+    "truthLabel": "sample_data",
+    "schemaVersion": "1.0"
+  },
+  "orgProfile": {
+    "edition": "Enterprise",
+    "cpqVersion": "Spring '25 Managed Package",
+    "activeUsers": 180,
+    "dataVolume": {
+      "products": 340,
+      "activeQuotes": 2400,
+      "historicalQuotes": 38000,
+      "activeContracts": 1200,
+      "activeSubscriptions": 3600
+    },
+    "integrations": [
+      { "name": "NetSuite", "type": "erp", "direction": "bidirectional" },
+      { "name": "Avalara", "type": "tax", "direction": "outbound" },
+      { "name": "Stripe", "type": "billing", "direction": "outbound" },
+      { "name": "Legacy provisioning", "type": "other", "direction": "outbound" }
+    ]
+  },
+  "verdict": {
+    "recommendation": "Proceed_With_Caution",
+    "rationale": "Stub verdict for M0 skeleton. Full rationale generated in Step 5."
+  },
+  "complexityScores": {
+    "overall": "High",
+    "overallNumeric": 68,
+    "dimensions": {
+      "pricingLogic": {
+        "score": 75,
+        "tier": "High",
+        "signal": "Stub signal — replaced in Step 5",
+        "evidence": {
+          "summary": ["Placeholder evidence summary."],
+          "detailed": [],
+          "raw": { "artifactReferences": [] }
+        }
+      },
+      "productCatalog": {
+        "score": 55,
+        "tier": "Medium",
+        "signal": "Stub signal — replaced in Step 5",
+        "evidence": {
+          "summary": ["Placeholder evidence summary."],
+          "detailed": [],
+          "raw": { "artifactReferences": [] }
+        }
+      },
+      "customCode": {
+        "score": 72,
+        "tier": "High",
+        "signal": "Stub signal — replaced in Step 5",
+        "evidence": {
+          "summary": ["Placeholder evidence summary."],
+          "detailed": [],
+          "raw": { "artifactReferences": [] }
+        }
+      },
+      "dataMigration": {
+        "score": 58,
+        "tier": "Medium",
+        "signal": "Stub signal — replaced in Step 5",
+        "evidence": {
+          "summary": ["Placeholder evidence summary."],
+          "detailed": [],
+          "raw": { "artifactReferences": [] }
+        }
+      },
+      "integrations": {
+        "score": 65,
+        "tier": "Medium",
+        "signal": "Stub signal — replaced in Step 5",
+        "evidence": {
+          "summary": ["Placeholder evidence summary."],
+          "detailed": [],
+          "raw": { "artifactReferences": [] }
+        }
+      },
+      "deprecatedConfig": {
+        "score": 50,
+        "tier": "Medium",
+        "signal": "Stub signal — replaced in Step 5",
+        "evidence": {
+          "summary": ["Placeholder evidence summary."],
+          "detailed": [],
+          "raw": { "artifactReferences": [] }
+        }
+      }
+    }
+  },
+  "topConcerns": [
+    {
+      "id": "concern-stub-1",
+      "title": "Stub concern (M0 placeholder)",
+      "severity": "High",
+      "audienceFraming": {
+        "executive": {
+          "headline": "Placeholder headline",
+          "impact": "Placeholder impact",
+          "nextAction": "Placeholder action"
+        },
+        "sales": {
+          "headline": "Placeholder headline",
+          "sowCaveat": "Placeholder caveat",
+          "talkingPoint": "Placeholder talking point"
+        },
+        "salesforce": {
+          "headline": "Placeholder headline",
+          "migrationRisk": "Placeholder risk"
+        }
+      },
+      "evidence": {
+        "summary": ["Placeholder evidence summary."],
+        "detailed": [],
+        "raw": { "artifactReferences": [] }
+      }
+    },
+    {
+      "id": "concern-stub-2",
+      "title": "Second stub concern",
+      "severity": "Medium",
+      "audienceFraming": {
+        "executive": { "headline": "P", "impact": "P", "nextAction": "P" },
+        "sales": { "headline": "P", "sowCaveat": "P", "talkingPoint": "P" },
+        "salesforce": { "headline": "P", "migrationRisk": "P" }
+      },
+      "evidence": {
+        "summary": ["Placeholder."],
+        "detailed": [],
+        "raw": { "artifactReferences": [] }
+      }
+    },
+    {
+      "id": "concern-stub-3",
+      "title": "Third stub concern",
+      "severity": "Low",
+      "audienceFraming": {
+        "executive": { "headline": "P", "impact": "P", "nextAction": "P" },
+        "sales": { "headline": "P", "sowCaveat": "P", "talkingPoint": "P" },
+        "salesforce": { "headline": "P", "migrationRisk": "P" }
+      },
+      "evidence": {
+        "summary": ["Placeholder."],
+        "detailed": [],
+        "raw": { "artifactReferences": [] }
+      }
+    }
+  ],
+  "loeEstimate": {
+    "tier": "High",
+    "weeksLow": 22,
+    "weeksHigh": 32,
+    "confidence": "Medium",
+    "confidenceLimitingFactors": ["Stub limiting factor"],
+    "primaryDrivers": ["Stub primary driver"],
+    "suggestedPhases": [
+      {
+        "name": "Discovery & Validation",
+        "durationWeeks": { "low": 3, "high": 4 },
+        "description": "Stub phase description"
+      }
+    ],
+    "sowCaveats": ["Stub SOW caveat"],
+    "changeOrderRisks": ["Stub change-order risk"],
+    "disclaimer": "Stub disclaimer — replaced in Step 5."
+  },
+  "rcaOpportunities": [],
+  "expansionSignals": [],
+  "codeInventory": [],
+  "rcaBenefitMapping": [],
+  "salesTalkingPoints": [],
+  "implementationFindings": [],
+  "aiNarratives": {
+    "executive": "Stub executive narrative — replaced in Step 5.",
+    "sales": "Stub sales narrative — replaced in Step 5.",
+    "salesforce": "Stub salesforce narrative — replaced in Step 5."
+  }
+}
