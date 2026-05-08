@@ -442,9 +442,13 @@ export function onAfterCalculate(quoteModel, lines) {
         'Whether multiple roots ever co-exist on a single quote.',
       ],
       requiredTests: [
-        'Two-level co-termed bundle aligns end dates and prorates correctly.',
-        'Three-level chain prorates without depth-cap clipping.',
-        'Mid-term amendment recomputes proration without breaking the asset chain.',
+        'Happy path: two-level co-termed bundle aligns end dates and prorates correctly.',
+        'Happy path: three-level chain prorates without depth-cap clipping.',
+        'Happy path: mid-term amendment recomputes proration without breaking the asset chain.',
+        'Edge case: chain deeper than 12 levels — verify behavior is intentional (clip, error, or escalate) rather than silently truncated.',
+        'Edge case: circular SBQQ__RequiredBy__c reference — must terminate with a clear error; today the depth cap masks this.',
+        'Edge case: amendment that cancels the parent line strands an orphaned bundled child segment — proration must produce a defensible result, not a divide-by-zero.',
+        'Migration cutover: asset already migrated to native RCA lifecycle is re-amended through the legacy proration path — confirm whether the legacy path is still reachable post-cutover and what the expected behavior is.',
       ],
       humanReviewRequired: true,
       reviewReasons: [
@@ -1038,7 +1042,7 @@ trigger CPQ_QuoteApprovalRouting on SBQQ__Quote__c (before update) {
       { type: 'rule', name: 'Lookup Query LQ_FXAdjustment', reference: 'SBQQ__LookupQuery__c' },
     ],
     recommendedRcaTarget: 'Pricing_Procedure',
-    conversionConfidence: 'Medium',
+    conversionConfidence: 'Low',
     draft: {
       generatedCandidate: `Pricing Procedure step (PRC_StandardCommercial_v1)
 └── Step "FXAdjustment"
@@ -1050,7 +1054,7 @@ trigger CPQ_QuoteApprovalRouting on SBQQ__Quote__c (before update) {
       plainLanguageExplanation:
         'FX adjustment becomes a Decision Table keyed on CurrencyIsoCode. The pricing procedure multiplies NetPrice by the lookup factor when the quote is non-USD.',
       targetPatternReasoning:
-        'Currency-keyed pricing adjustment. Implemented as a Pricing Procedure step backed by a Decision Table keyed on CurrencyIsoCode. Medium confidence because FX governance and refresh cadence need finance sign-off.',
+        'Currency-keyed pricing adjustment. Implemented as a Pricing Procedure step backed by a Decision Table keyed on CurrencyIsoCode. Confidence Low because the FX governance model is unknown — refresh cadence, authoritative source, stale-rate behavior, and rounding policy all need finance sign-off before this draft can be trusted as a starting point.',
       preservedBehavior: [
         'Non-USD quote lines adjusted by the per-currency factor.',
       ],
