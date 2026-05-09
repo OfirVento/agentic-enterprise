@@ -6,6 +6,8 @@ type Props = { payload: AssessmentPayload };
 
 export function TimeToValue({ payload }: Props) {
   const loe = payload.loeEstimate;
+  // Source: rcaOpportunities.length. Must match the count of capability tiles
+  // rendered by ExecutiveLayer's "RCA capabilities unlocked" grid.
   const moduleCount = payload.rcaOpportunities.length;
 
   return (

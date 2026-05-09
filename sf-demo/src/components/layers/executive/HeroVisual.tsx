@@ -5,26 +5,38 @@ type Props = {
   payload: AssessmentPayload;
 };
 
+const FRICTION_THRESHOLD = 50;
+
 /**
- * Two-bar comparison: capability surfaces in use today (CPQ baseline) vs.
- * the same set plus RCA opportunities unlocked.
+ * Two-bar comparison: complexity dimensions that exceed mid-tier today
+ * vs. RCA capabilities mapped to address them.
  *
- * Heuristic — the bar values do not come from a single payload field but
- * are derived: CPQ baseline = a fixed surface count of 4 (pricing,
- * configuration, approvals, contracts) per the customer profile; RCA
- * upside = baseline + rcaOpportunities.length.
+ * Both bars trace to specific payload fields:
+ *   Bar 1 = count of complexityScores.dimensions[*] where score > 50
+ *   Bar 2 = rcaBenefitMapping.length
+ *
+ * The threshold (50) marks the boundary between Low and Medium complexity
+ * tiers in the demo profile.
  */
 export function HeroVisual({ payload }: Props) {
-  const cpqToday = 4;
-  const rcaTotal = cpqToday + payload.rcaOpportunities.length;
-  const max = Math.max(rcaTotal, 1);
+  const dimensionEntries = Object.entries(payload.complexityScores.dimensions) as Array<
+    [string, AssessmentPayload['complexityScores']['dimensions'][keyof AssessmentPayload['complexityScores']['dimensions']]]
+  >;
+  const totalDimensions = dimensionEntries.length;
+  const frictionDimensions = dimensionEntries.filter(([, d]) => d.score > FRICTION_THRESHOLD).length;
+  const mappedCapabilities = payload.rcaBenefitMapping.length;
+  const max = Math.max(frictionDimensions, mappedCapabilities, 1);
 
   const bars = [
-    { label: 'CPQ today', value: cpqToday, hint: 'Capability surfaces in active use' },
     {
-      label: 'With Revenue Cloud Advanced',
-      value: rcaTotal,
-      hint: `${cpqToday} preserved + ${payload.rcaOpportunities.length} unlocked`,
+      label: 'Friction dimensions today',
+      value: frictionDimensions,
+      hint: `${frictionDimensions} of ${totalDimensions} complexity dimensions score above ${FRICTION_THRESHOLD}`,
+    },
+    {
+      label: 'RCA capabilities mapped to address them',
+      value: mappedCapabilities,
+      hint: `${mappedCapabilities} entries in rcaBenefitMapping pair CPQ pain points with RCA capabilities`,
     },
   ];
 
@@ -33,10 +45,11 @@ export function HeroVisual({ payload }: Props) {
       <header className="mb-5 flex items-start justify-between gap-4">
         <div>
           <h2 className="text-base font-semibold text-foreground">
-            Capabilities — today vs. with RCA
+            Where the org has friction — and what RCA brings to address it
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            CPQ utilization compared with the modules unlocked by migration.
+            {frictionDimensions} of {totalDimensions} complexity dimensions exceed mid-tier today;{' '}
+            {mappedCapabilities} mapped RCA capabilities address them.
           </p>
         </div>
         <TruthLabel variant="heuristic" />
@@ -63,6 +76,11 @@ export function HeroVisual({ payload }: Props) {
           );
         })}
       </div>
+
+      <p className="mt-4 text-xs italic text-muted-foreground">
+        Sources: complexityScores.dimensions (count where score &gt; {FRICTION_THRESHOLD}),
+        rcaBenefitMapping.length.
+      </p>
     </section>
   );
 }
