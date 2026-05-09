@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { EvidenceLink } from '@/components/shared/EvidenceLink';
+import { TruthLabel } from '@/components/shared/TruthLabel';
 import type { Concern, Severity } from '@/types/assessment';
 
 const SEVERITY_DOT: Record<Severity, string> = {
@@ -29,7 +30,10 @@ export function ConcernCard({ concern }: { concern: Concern }) {
           aria-label={`Severity: ${concern.severity}`}
         />
         <div className="flex-1">
-          <h3 className="text-base font-semibold leading-snug text-foreground">{f.headline}</h3>
+          <div className="flex items-start justify-between gap-3">
+            <h3 className="text-base font-semibold leading-snug text-foreground">{f.headline}</h3>
+            <TruthLabel variant="ai_generated" className="shrink-0" />
+          </div>
           <p className="mt-1 text-sm text-muted-foreground">{f.impact}</p>
         </div>
         <ChevronDown
